@@ -16,4 +16,17 @@ i + 112;
 
 for(var i = 1111; i <= 9999; i += 1111){
 	alert("i = "+ i);
+} 
+
+
+// or
+var a = 10;
+var increment;
+while (i < 10000) {
+	i++;
+	increment = i;
+	for(var b = 0; b < 9; b++){
+		console.log(a);
+		a += increment;
+	}
 }
