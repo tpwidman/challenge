@@ -14,7 +14,7 @@
           {{edit-todo class="edit" value=title focus-out="acceptChanges" insert-newline="acceptChanges"}}
         {{else}}
           {{input type="checkbox" checked=isCompleted class="toggle"}}
-          <label {{action "editTodo" on="doubleClick"}}>{{name}}</label><button {{action "removeTodo"}} class="destroy"></button>
+          <label {{action "editTodo" on="doubleClick"}}>{{task}}</label><button {{action "removeTodo"}} class="destroy">x</button>
         {{/if}}
       </li>
     {{/each}}
@@ -28,7 +28,7 @@
       <h1>trello | ember</h1>
       <h3>Double-click to edit a todo</h3>
       {{input type="text" id="new-todo" placeholder="Add todo to board" 
-              value=newTitle action="createTodo"}}
+              value=newTask action="createTodo"}}
     </header>
 
       <section id="main">

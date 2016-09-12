@@ -6,7 +6,7 @@ Todos.TodoController = Ember.ObjectController.extend({
     acceptChanges: function () {
       this.set('isEditing', false);
 
-      if (Ember.isEmpty(this.get('model.title'))) {
+      if (Ember.isEmpty(this.get('model.task'))) {
         this.send('removeTodo');
       } else {
         this.get('model').save();
@@ -40,17 +40,17 @@ Todos.TodosController = Ember.ArrayController.extend({
   actions: {
     createTodo: function () {
       // Get the todo title set by the "New Todo" text field
-      var title = this.get('newTitle');
-      if (!title.trim()) { return; }
+      var task = this.get('newTask');
+      if (!task.trim()) { return; }
 
       // Create the new Todo model
       var todo = this.store.createRecord('todo', {
-        title: title,
+        task: task,
         isCompleted: false
       });
 
       // Clear the "New Todo" text field
-      this.set('newTitle', '');
+      this.set('newTask', '');
 
       // Save the new model
       todo.save();

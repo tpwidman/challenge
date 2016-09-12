@@ -7,15 +7,15 @@ Todos.BoardController = Ember.ObjectController.extend({
       this.set('isEditing', false);
 
       if (Ember.isEmpty(this.get('model.title'))) {
-        this.send('removeTodo');
+        this.send('removeBoard');
       } else {
         this.get('model').save();
       }
     },
-    removeTodo: function () {
-      var todo = this.get('model');
-      todo.deleteRecord();
-      todo.save();
+    removeBoard: function () {
+      var board = this.get('model');
+      board.deleteRecord();
+      board.save();
     }
   },
   isEditing: false,
