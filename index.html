@@ -6,14 +6,41 @@
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <script type="text/x-handlebars" data-template-name="todos">
+  <p>check console for #2 answer</p>
+  <script type="text/x-handlebars" data-template-name="task/index">
+  <div class="board-row">
+    {{#each board in boards}}
+    <h2>
+      {{board.title}}
+    </h2> 
+    {{/each}}
+    <ul id="task-list">
+      {{#each task in board.tasks itemController="task"}}
+        <li {{bind-attr class="task.isCompleted:completed task.isEditing:editing"}}>
+          {{#if task.isEditing}}
+            {{edit-task class="edit" value=task.name focus-out="acceptChanges" insert-newline="acceptChanges"}}
+          {{else}}
+            {{input type="checkbox" checked=task.isCompleted class="toggle"}}
+            <label {{action "editTask" on="doubleClick"}}>{{task.name}}</label><button {{action "removeTask"}} class="destroy"></button>
+          {{/if}}
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+  </script>
 
-  <section id="todoapp">
+  <script type="text/x-handlebars" data-template-name="task">
+
+  <section id="taskapp">
     <header id="header">
-      <h1>todos</h1>
-      {{input type="text" id="new-board" placeholder="Add Board" 
-              value=newTitle action="createBoard"}}
-    </header>
+      <h1>trello | ember</h1>
+      <h5>Double-click to edit a task</h5>
+      {{input type="text" id="new-board" placeholder="Add board" value=newBoard action="createBoard" }}
+      </header>
+      <hr>
+      <br>  
+      {{input type="text" id="new-task" placeholder="Add task" 
+              value=newName action="createTask"}}
 
       <section id="main">
         {{outlet}}
@@ -21,42 +48,39 @@
       </section>
 
       <footer id="footer">
-        <span id="item-count">
+        <span id="task-count">
           <strong>{{remaining}}</strong> {{inflection}} left</span>
+        <ul id="filters">
+          <li>
+            {{#link-to "task.index" activeClass="selected"}}All{{/link-to}}
+          </li>
+          <li>
+            {{#link-to "task.active" activeClass="selected"}}Active{{/link-to}}
+          </li>
+          <li>
+            {{#link-to "task.completed" activeClass="selected"}}Completed{{/link-to}}
+          </li>
+        </ul>
 
         {{#if hasCompleted}}
           <button id="clear-completed" {{action "clearCompleted"}}>
             Clear completed ({{completed}})
           </button>
         {{/if}}
-      </footer>
+    </footer>
   </section>
-
-  <footer id="info">
-    <p>Edit items by clicking the icon</p>
-  </footer>
   
-  </script>
-
-  <script type="text/x-handlebars" data-template-name="todos/index">
-  <ul id="todo-list">
-    {{#each todo in model itemController="todo"}}
-      <li {{bind-attr class="todo.isCompleted:completed todo.isEditing:editing"}}>
-        {{#if todo.isEditing}}
-          {{edit-todo class="edit" value=todo.title focus-out="acceptChanges" insert-newline="acceptChanges"}}
-        {{else}}
-          {{input type="checkbox" checked=todo.isCompleted class="toggle"}}
-          <label {{action "editTodo" on="doubleClick"}}>{{todo.title}}</label><button {{action "removeTodo"}} class="destroy"></button>
-        {{/if}}
-      </li>
-    {{/each}}
-  </ul>
   </script>
 
   <script src="js/libs/jquery-1.11.2.min.js"></script>
   <script src="js/libs/handlebars-v1.3.0.js"></script>
   <script src="js/libs/ember.js"></script>
   <script src="js/libs/ember-data.js"></script>
-  <script src="js/application.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/models/boards.js"></script>
+  <script src="js/models/tasks.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/controllers/taskController.js"></script>
+  <script src="numbersolution.js"></script>
 </body>
 </html>

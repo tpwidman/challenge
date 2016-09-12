@@ -1,0 +1,7 @@
+hr {
+    width: 170px;
+    display: inline-block;
+}
+li {
+    list-style: none;
+}
