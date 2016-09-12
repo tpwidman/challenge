@@ -1,41 +1,41 @@
-TrelloClone.Router.map(function () {
-  this.resource('task', { path: '/' }, function () {
+Todos.Router.map(function () {
+  this.resource('todos', { path: '/' }, function () {
     // additional child routes    
     this.route('active');
     this.route('completed');
   });
 });
 
-TrelloClone.TasksRoute = Ember.Route.extend({
+Todos.TodosRoute = Ember.Route.extend({
   model: function () {
-    return this.store.find('task');
+    return this.store.find('todo');
   }
 });
 
-TrelloClone.TaskIndexRoute = Ember.Route.extend({
+Todos.TodosIndexRoute = Ember.Route.extend({
   model: function () {
-    return this.modelFor('tasks');
+    return this.modelFor('todos');
   }
 });
 
-TrelloClone.TasksActiveRoute = Ember.Route.extend({
+Todos.TodosActiveRoute = Ember.Route.extend({
   model: function(){
-    return this.store.filter('task', function (task) {
-      return !task.get('isCompleted');
+    return this.store.filter('todo', function (todo) {
+      return !todo.get('isCompleted');
     });
   },
   renderTemplate: function(controller){
-    this.render('task/index', {controller: controller});
+    this.render('todos/index', {controller: controller});
   }
 });
 
-TrelloClone.TasksCompletedRoute = Ember.Route.extend({
+Todos.TodosCompletedRoute = Ember.Route.extend({
   model: function(){
-    return this.store.filter('task', function (task) {
-      return task.get('isCompleted');
+    return this.store.filter('todo', function (todo) {
+      return todo.get('isCompleted');
     });
   },
   renderTemplate: function(controller){
-    this.render('task/index', {controller: controller});
+    this.render('todos/index', {controller: controller});
   }
 });

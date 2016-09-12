@@ -1,11 +1,11 @@
-TrelloClone.Task = DS.Model.extend({
+Todos.Todo = DS.Model.extend({
   name: DS.attr('string'),
   isCompleted: DS.attr('boolean'),
   board: DS.belongsTo('board', {async:true})
   
 });
 
-TrelloClone.Task.FIXTURES = [
+Todos.Todo.FIXTURES = [
     {
         id: 1,
         name: 'Use flat-edge as a guide for writing straight lines',

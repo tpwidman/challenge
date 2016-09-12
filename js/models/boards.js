@@ -1,8 +1,8 @@
-TrelloClone.Board = DS.Model.extend({
+Todos.Board = DS.Model.extend({
   title: DS.attr('string'),
 });
 
-TrelloClone.Board.FIXTURES = [
+Todos.Board.FIXTURES = [
     {
         id: 1,
         name: 'Things to do with a Pencil',

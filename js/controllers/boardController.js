@@ -1,4 +1,4 @@
-TrelloCone.BoardController = Ember.ObjectController.extend({
+Todos.BoardController = Ember.ObjectController.extend({
     actions:{
     editBoard: function () {
       this.set('isEditing', true);
@@ -22,7 +22,7 @@ TrelloCone.BoardController = Ember.ObjectController.extend({
   
 })
 
-TrelloClone.BoardsController = Ember.ArrayController.extend({
+Todos.BoardsController = Ember.ArrayController.extend({
   itemController: 'title',
 
   actions: {

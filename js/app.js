@@ -1,2 +1,3 @@
-window.TrelloClone = Ember.Application.create();
-TrelloClone.ApplicationAdapter = DS.FixtureAdapter.extend();
+window.Todos = Ember.Application.create();
+
+Todos.ApplicationAdapter = DS.FixtureAdapter.extend();

@@ -6,41 +6,30 @@
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <p>check console for #2 answer</p>
-  <script type="text/x-handlebars" data-template-name="task/index">
-  <div class="board-row">
-    {{#each board in boards}}
-    <h2>
-      {{board.title}}
-    </h2> 
+  <script type="text/x-handlebars" data-template-name="todos/index">
+  <ul id="todo-list">
+    {{#each itemController="todo"}}
+      <li {{bind-attr class="isCompleted:completed isEditing:editing"}}>
+        {{#if isEditing}}
+          {{edit-todo class="edit" value=title focus-out="acceptChanges" insert-newline="acceptChanges"}}
+        {{else}}
+          {{input type="checkbox" checked=isCompleted class="toggle"}}
+          <label {{action "editTodo" on="doubleClick"}}>{{name}}</label><button {{action "removeTodo"}} class="destroy"></button>
+        {{/if}}
+      </li>
     {{/each}}
-    <ul id="task-list">
-      {{#each task in board.tasks itemController="task"}}
-        <li {{bind-attr class="task.isCompleted:completed task.isEditing:editing"}}>
-          {{#if task.isEditing}}
-            {{edit-task class="edit" value=task.name focus-out="acceptChanges" insert-newline="acceptChanges"}}
-          {{else}}
-            {{input type="checkbox" checked=task.isCompleted class="toggle"}}
-            <label {{action "editTask" on="doubleClick"}}>{{task.name}}</label><button {{action "removeTask"}} class="destroy"></button>
-          {{/if}}
-        </li>
-      {{/each}}
-    </ul>
-  </div>
+  </ul>
   </script>
 
-  <script type="text/x-handlebars" data-template-name="task">
+  <script type="text/x-handlebars" data-template-name="todos">
 
-  <section id="taskapp">
+  <section id="todoapp">
     <header id="header">
       <h1>trello | ember</h1>
-      <h5>Double-click to edit a task</h5>
-      {{input type="text" id="new-board" placeholder="Add board" value=newBoard action="createBoard" }}
-      </header>
-      <hr>
-      <br>  
-      {{input type="text" id="new-task" placeholder="Add task" 
-              value=newName action="createTask"}}
+      <h3>Double-click to edit a todo</h3>
+      {{input type="text" id="new-todo" placeholder="Add todo to board" 
+              value=newTitle action="createTodo"}}
+    </header>
 
       <section id="main">
         {{outlet}}
@@ -48,17 +37,17 @@
       </section>
 
       <footer id="footer">
-        <span id="task-count">
+        <span id="todo-count">
           <strong>{{remaining}}</strong> {{inflection}} left</span>
         <ul id="filters">
           <li>
-            {{#link-to "task.index" activeClass="selected"}}All{{/link-to}}
+            {{#link-to "todos.index" activeClass="selected"}}All{{/link-to}}
           </li>
           <li>
-            {{#link-to "task.active" activeClass="selected"}}Active{{/link-to}}
+            {{#link-to "todos.active" activeClass="selected"}}Active{{/link-to}}
           </li>
           <li>
-            {{#link-to "task.completed" activeClass="selected"}}Completed{{/link-to}}
+            {{#link-to "todos.completed" activeClass="selected"}}Completed{{/link-to}}
           </li>
         </ul>
 
@@ -67,9 +56,9 @@
             Clear completed ({{completed}})
           </button>
         {{/if}}
-    </footer>
+      </footer>
   </section>
-  
+  <p>check console for #2 answer</p>
   </script>
 
   <script src="js/libs/jquery-1.11.2.min.js"></script>

@@ -1,21 +1,21 @@
-TrelloClone.TaskController = Ember.ObjectController.extend({
+Todos.TodoController = Ember.ObjectController.extend({
   actions: {
-    editTask: function () {
+    editTodo: function () {
       this.set('isEditing', true);
     },
     acceptChanges: function () {
       this.set('isEditing', false);
 
-      if (Ember.isEmpty(this.get('model.name'))) {
-        this.send('removeTask');
+      if (Ember.isEmpty(this.get('model.title'))) {
+        this.send('removeTodo');
       } else {
         this.get('model').save();
       }
     },
-    removeTask: function () {
-      var task = this.get('model');
-      task.deleteRecord();
-      task.save();
+    removeTodo: function () {
+      var todo = this.get('model');
+      todo.deleteRecord();
+      todo.save();
     }
   },
 
@@ -36,24 +36,24 @@ TrelloClone.TaskController = Ember.ObjectController.extend({
   }.property('model.isCompleted')
 });
 
-TrelloClone.TasksController = Ember.ArrayController.extend({
+Todos.TodosController = Ember.ArrayController.extend({
   actions: {
-    createTask: function () {
-      // Get the task title set by the "New Task" text field
-      var name = this.get('newName');
-      if (!name.trim()) { return; }
+    createTodo: function () {
+      // Get the todo title set by the "New Todo" text field
+      var title = this.get('newTitle');
+      if (!title.trim()) { return; }
 
-      // Create the new Task model
-      var task = this.store.createRecord('task', {
-        name: name,
+      // Create the new Todo model
+      var todo = this.store.createRecord('todo', {
+        title: title,
         isCompleted: false
       });
 
-      // Clear the "New Task" text field
-      this.set('newName', '');
+      // Clear the "New Todo" text field
+      this.set('newTitle', '');
 
       // Save the new model
-      task.save();
+      todo.save();
     },
     clearCompleted: function () {
       var completed = this.filterProperty('isCompleted', true);
@@ -80,20 +80,14 @@ TrelloClone.TasksController = Ember.ArrayController.extend({
   }.property('@each.isCompleted'),
   
   allAreDone: function (key, value) {
-    if (value === undefined) {
-      return !!this.get('length') && this.everyProperty('isCompleted', true);
-    } else {
-      this.setEach('isCompleted', value);
-      this.invoke('save');
-      return value;
-    }
+    return !!this.get('length') && this.everyProperty('isCompleted', true);
   }.property('@each.isCompleted')
 });
 
-TrelloClone.EditTaskView = Ember.TextField.extend({
+Todos.EditTodoView = Ember.TextField.extend({
   didInsertElement: function () {
     this.$().focus();
   }
 });
 
-Ember.Handlebars.helper('edit-task', TrelloClone.EditTaskView);
+Ember.Handlebars.helper('edit-todo', Todos.EditTodoView);
