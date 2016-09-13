@@ -1,6 +1,6 @@
 //object controller for the items model
 TrelloClone.ItemController = Ember.ObjectController.extend({
-    itemController:'items',
+    itemController:'item',
     //the isEditing property is turned on by the input helper
     isEditing: false,
     newBoard: null,

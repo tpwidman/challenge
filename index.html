@@ -11,7 +11,7 @@
 		<header>
       <h1>trello | ember</h1>
       <p>check console for #2 answer</p>
-		{{input type="text" id="new-board" itemController="boards" placeholder="Add new board" value="New Board" action="createBoard"}}
+		{{input type="text" id="new-board" itemController="boards" placeholder="Add new board" value=board.name action "createBoard"}}
     </header>
 <hr>
 		{{outlet}}
@@ -20,18 +20,18 @@
 <script type="text/x-handlebars" data-template-name="boards/index">
 <div id="boards">
   {{#each board in boards itemController="board"}}
-  <h1>{{board_name}}</h1>
-  <button {{action "removeBoard"}} class="destroy">x</button>
-  {{input type="text" id="new-item" value="New Task" action="createItem"}}
+  <h1>{{board.name}}</h1>
+  <button {{action "removeBoard"}}>x</button>
+  {{input type="text" id="new-item" value=item.task action "createItem"}}
     <ul>
-    {{#each item in items itemController="items"}}
+    {{#each item in items itemController="item"}}
       <li {{bind-attr class="item.isCompleted:completed item.isEditing:editing"}}>
         {{#if isEditing}}
           {{edit-task class="edit" value=item.task focus-out="updateItem" insert-newline="updateItem"}}
         {{else}}
           {{input type="checkbox" checked=item.isCompleted}}
           <label {{action "editItem" on="doubleClick" }}>{{item.task}}</label>
-          <button {{action "deleteItem"}} class="destroy">x</button>
+          <button {{action "deleteItem"}}>x</button>
         {{/if}}
       </li>
       {{/each}}
