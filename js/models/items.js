@@ -1,6 +1,7 @@
 TrelloClone.Items = DS.Model.extend({		
     task: DS.attr('string'),		
-    isCompleted: DS.attr('boolean'),		
+    isCompleted: DS.attr('boolean'),
+    //'items' is a property belonging to the board model that has index based on which board it belongs to		
     items: DS.belongsTo('board', {async:true})		
     
 });		
@@ -18,7 +19,7 @@ TrelloClone.Items.FIXTURES = [
         isCompleted: false,		
         items:1		
     },		
-    {		
+    {		 
         id: 3,		
         task: 'Plant a seed',		
         isCompleted: false,		

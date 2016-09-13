@@ -1,7 +1,11 @@
+//object controller for the items model
 TrelloClone.ItemController = Ember.ObjectController.extend({
+    //the isEditing property is turned on by the input helper
     isEditing: false,
     newBoard: null,
+    //needs takes in an array of controller names, we need to grab the boards controller
     needs:['boards'],
+
     updateBoard: function(){
         var item = this.get('model'),
         board = item.get('board'),
@@ -15,12 +19,14 @@ TrelloClone.ItemController = Ember.ObjectController.extend({
             board.save();
             newBoard.save();
         });
+    //This is like an event listener for updating the board
+    //Observers never fire until after the initialization of an object is complete.
     }.observes('newBoard'),
 
     removeItemfromBoard: function(){
         var item = this.get('model'),
         board = item.get('board');
-        board.get('items').removeItem(item);S
+        board.get('items').removeItem(item);
     },
     action: {
         editItem: function(){
