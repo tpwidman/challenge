@@ -5,7 +5,7 @@ TrelloClone.Items = DS.Model.extend({
     items: DS.belongsTo('board', {async:true})		
     
 });		
- 		
+ 	//answer to #3
 TrelloClone.Items.FIXTURES = [		
     {		
         id: 1,		
