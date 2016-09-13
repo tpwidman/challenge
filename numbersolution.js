@@ -14,7 +14,6 @@ i + 112;
 for(var i = 1111; i <= 9999; i += 1111){
 	console.log(i);
 } 
-
 console.log('second way');
 // or
 var a = 10;

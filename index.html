@@ -20,14 +20,20 @@
 <script type="text/x-handlebars" data-template-name="boards/index">
 <div id="boards">
   {{#each board in boards itemController="board"}}
-  <h1>{{board.name}}</h1>
+  <h1 {{action "editBoard" on="doubleClick" }}>{{board.name}}</h1>
+  {{#if isEditing}}
+    {{edit-board value=board.name focus-out="updateBoard" insert-newline="updateBoard"}}
+  {{else}}
+  {{/if}}
   <button {{action "removeBoard"}}>x</button>
+  </div>
+  <div id="items">
   {{input type="text" id="new-item" value=item.task action "createItem"}}
     <ul>
     {{#each item in items itemController="item"}}
       <li {{bind-attr class="item.isCompleted:completed item.isEditing:editing"}}>
         {{#if isEditing}}
-          {{edit-task class="edit" value=item.task focus-out="updateItem" insert-newline="updateItem"}}
+          {{edit-task value=item.task focus-out="updateItem" insert-newline="updateItem"}}
         {{else}}
           {{input type="checkbox" checked=item.isCompleted}}
           <label {{action "editItem" on="doubleClick" }}>{{item.task}}</label>
@@ -37,7 +43,7 @@
       {{/each}}
     </ul>
     {{/each}}
-</div>
+  </div>
 </script>
 
   <script src="js/libs/jquery-1.11.2.min.js"></script>

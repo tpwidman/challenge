@@ -2,6 +2,7 @@
 TrelloClone.BoardController = Ember.ObjectController.extend({
     itemController:'board',
     actions: {
+        
         editBoard: function(){
             //this function sets the isEditing property in the itemcontroller to true
             this.set('isEditing', true);
