@@ -27,4 +27,4 @@ while (a < 10000) {
 		a += increment;
 	}
 }
-console.log('no idea what sublinear is but I did this twice')
+console.log('no idea what sublinear is but I did this twice!')

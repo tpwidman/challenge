@@ -13,7 +13,7 @@
       <p>check console for #2 answer</p>
 		{{input type="text" id="new-board" itemController="boards" placeholder="Add new board" value="New Board" action="createBoard"}}
     </header>
-
+<hr>
 		{{outlet}}
 </script>
 
@@ -22,7 +22,7 @@
   {{#each board in boards itemController="boards"}}
   <h1>{{board_name}}</h1>
   <button {{action "removeBoard"}}></button>
-  {{input type="text" id="new-item" value=newTask action="createItem"}}
+  {{input type="text" id="new-item" value="New Task" action="createItem"}}
     <ul>
     {{#each item in items itemController="item"}}
       <li {{bind-attr class="item.isEditing:editing" }} >
