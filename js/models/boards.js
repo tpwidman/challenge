@@ -1,18 +1,18 @@
 TrelloClone.Board = DS.Model.extend({
-    boardName: DS.attr(),
+    board_name: DS.attr(),
     items: DS.hasMany('item', {async:true})
 });
-DS.Board.FIXTURES = [
+TrelloClone.Board.FIXTURES = [
     {
-        boardName: 'Things to do with a pencil',
+        board_name: 'Things to do with a pencil',
         items: 1
     },
     {
-        boardName: 'Things to do with a sock',
+        board_name: 'Things to do with a sock',
         items: 2  
     },
     {
-        boardName: 'Things to do with a paper clip',
-        items: 2  
+        board_name: 'Things to do with a paper clip',
+        items: 3  
     },
 ]

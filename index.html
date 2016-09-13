@@ -6,21 +6,37 @@
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-</body>
 
-<section id="boards">
-  {{#each board in boards itemController="board"}}
-  <h1>{{boardName}}</h1>
-  <ul>
-  {{#each item in items itemController="item"}}
-  <li {{bind-attr class="item.isEditing:editing" }} >
-    {{#if item.isEditing}}
-      {{edit-task class="edit" value=item.task focus-out="acceptChanges" insert-newline="acceptChanges"}}
-    {{else}}
-      <label {{action "editItem" on="doubleClick" }}>{{item.task}}</label><button {{action "removeItem"}} class="destroy"></button>
-  </li>
-  </ul>
-</section>
+<script type="text/x-handlebars">
+		<header>
+      <h1>trello | ember</h1>
+      <p>check console for #2 answer</p>
+		{{input type="text" id="new-board" placeholder="Add new board" value="New Board" action="createBoard"}}
+    </header>
+		{{outlet}}
+</script>
+
+<script type="text/x-handlebars" data-template-name="boards">
+<div id="boards">
+  {{#each board in boards itemController="boards"}}
+  <h1>{{board_name}}</h1>
+  <button {{action "removeBoard"}}></button>
+  {{input type="text" id="new-item" value=newTask action="createItem"}}
+    <ul>
+    {{#each item in items itemController="item"}}
+      <li {{bind-attr class="item.isEditing:editing" }} >
+        {{#if isEditing}}
+          {{edit-task class="edit" value=item.task focus-out="acceptChanges" insert-newline="acceptChanges"}}
+        {{else}}
+          <label {{action "editItem" on="doubleClick" }}>{{item.task}}</label>
+          <button {{action "deleteItem"}} class="destroy">x</button>
+        {{/if}}
+      </li>
+      {{/each}}
+    </ul>
+    {{/each}}
+</div>
+</script>
 
   <script src="js/libs/jquery-1.11.2.min.js"></script>
   <script src="js/libs/handlebars-v1.3.0.js"></script>
