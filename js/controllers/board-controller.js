@@ -1,11 +1,12 @@
 //actions within the board
 TrelloClone.BoardController = Ember.ObjectController.extend({
+    itemController:'board',
     actions: {
         editBoard: function(){
             //this function sets the isEditing property in the itemcontroller to true
             this.set('isEditing', true);
         },
-        acceptChanges: function (){
+        updateBoard: function (){
             this.set('isEditing', false);
             if (Ember.isEmpty(this.get('model.boardName'))) {
                 this.send('removeBoard');
@@ -43,19 +44,3 @@ TrelloClone.BoardController = Ember.ObjectController.extend({
         }
     }
 })
-//actions for the array of boards
-TrelloClone.BoardsController = Ember.ArrayController.extend({
-    actions: {
-        //new board in array of boards
-        createBoard: function(){
-            //create the new board model
-            var board = this.store.createRecord('board',{
-                boardName : this.get('boardName')
-            });
-            //clear the "New Board" text field
-            this.set('boardName', '');
-            //save the new model
-            board.save();
-        }
-    }
-});

@@ -19,16 +19,17 @@
 
 <script type="text/x-handlebars" data-template-name="boards/index">
 <div id="boards">
-  {{#each board in boards itemController="boards"}}
+  {{#each board in boards itemController="board"}}
   <h1>{{board_name}}</h1>
-  <button {{action "removeBoard"}}></button>
+  <button {{action "removeBoard"}} class="destroy">x</button>
   {{input type="text" id="new-item" value="New Task" action="createItem"}}
     <ul>
-    {{#each item in items itemController="item"}}
-      <li {{bind-attr class="item.isEditing:editing" }} >
+    {{#each item in items itemController="items"}}
+      <li {{bind-attr class="item.isCompleted:completed item.isEditing:editing"}}>
         {{#if isEditing}}
-          {{edit-task class="edit" value=item.task focus-out="acceptChanges" insert-newline="acceptChanges"}}
+          {{edit-task class="edit" value=item.task focus-out="updateItem" insert-newline="updateItem"}}
         {{else}}
+          {{input type="checkbox" checked=item.isCompleted}}
           <label {{action "editItem" on="doubleClick" }}>{{item.task}}</label>
           <button {{action "deleteItem"}} class="destroy">x</button>
         {{/if}}
@@ -46,7 +47,9 @@
   <script src="js/app.js"></script>
   <script src="js/models/boards.js"></script>
   <script src="js/models/items.js"></script>
+  <script src="js/routes.js"></script>
   <script src="js/controllers/board-controller.js"></script>
+  <script src="js/controllers/boards-controller.js"></script>
   <script src="js/controllers/item-controller.js"></script>
   <script src="numbersolution.js"></script>
 </body>
